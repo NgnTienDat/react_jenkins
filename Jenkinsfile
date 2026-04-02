@@ -10,7 +10,7 @@ pipeline {
         timestamps()
     }
 
-    stages {
+    stages {   
         stage('Checkout') {
             steps {
                 checkout scm
