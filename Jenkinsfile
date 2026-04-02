@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     options {
-        timeout(time: 30, unit: 'MINUTES') // set timeout cho toàn pipeline
-        timestamps() // thêm timestamp vào log
+        timeout(time: 30, unit: 'MINUTES')
+        timestamps()
     }
 
     stages {
@@ -13,21 +13,20 @@ pipeline {
             }
         }
 
-    }
-
-    stage('Install and Lint and Build') {
-        agent {
-            docker {
-                image 'node:22-alpine'
-                reuseNode true // reuse container để giữ cache node_modules
+        stage('Install and Lint and Build') {
+            agent {
+                docker {
+                    image 'node:22-alpine'
+                    reuseNode true
+                }
             }
-        }
 
-        steps {
-            sh 'node -v && npm -v'
-            sh 'npm ci'
-            sh 'npm run lint'
-            sh 'npm run build'
+            steps {
+                sh 'node -v && npm -v'
+                sh 'npm ci'
+                sh 'npm run lint'
+                sh 'npm run build'
+            }
         }
     }
 
