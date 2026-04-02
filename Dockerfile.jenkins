@@ -1,0 +1,7 @@
+# Jenkins LTS + Docker CLI: pipeline dùng `agents { docker { ... } }` cần lệnh `docker` để chạy container agent
+
+
+FROM jenkins/jenkins:lts
+USER root
+RUN apt-get update && apt-get install -y sudo --no-install-recommends docker-cli && rm -rf /var/lib/apt/lists/*
+USER jenkins
